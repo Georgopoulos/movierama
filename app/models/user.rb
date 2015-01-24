@@ -13,11 +13,11 @@ class User < ActiveRecord::Base
 
 	# -------------------------- Callbacks -------------------------------
 
-	before_save { self.email = email.downcase }
+	before_save { email.downcase! }
 
 	# -------------------------- Validations -----------------------------
 
-	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
 
 	validates :email, presence: true, length: { maximum: 208 },
 										format: { with: VALID_EMAIL_REGEX },
