@@ -1,6 +1,13 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+/* ------------ mixins --------------- */
+@mixin box_sizing {
+  -moz-box-sizing:    border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing:         border-box;
+}
+
 html {
   overflow-y: scroll;
 }
@@ -17,7 +24,7 @@ textarea {
   resize: vertical;
 }
 
-/* typography */
+/* ----------- typography ------------- */
 
 h1, h2, h3, h4, h5, h6 {
   line-height: 1;
@@ -44,7 +51,7 @@ p {
   line-height: 1.7em;
 }
 
-/* header */
+/* -------------- header ---------------- */
 
 #logo {
   float: left;
@@ -61,7 +68,7 @@ p {
 }
 
 
-/* footer */
+/* ---------------- footer ---------------- */
 
 footer {
   margin-top: 45px;
@@ -73,5 +80,43 @@ footer {
     &:hover {
       color: #222;
     }
+  }
+}
+
+/* ------------------- misc ----------------- */
+
+.debug_dump {
+  clear: both;
+  float: left;
+  width: 100%;
+  margin-top: 45px;
+  @include box_sizing;
+}
+
+/* ------------------- forms ----------------- */
+
+input, textarea, select, .uneditable-input {
+  border: 1px solid #bbb;
+  width: 100%;
+  margin-bottom: 15px;
+  @include box_sizing;
+}
+
+input {
+  height: auto !important;
+}
+
+#error_explanation {
+  color: red;
+  ul {
+    color: red;
+    margin: 0 0 30px 0;
+  }
+}
+
+.field_with_errors {
+  @extend .has-error;
+  .form-control {
+    color: $state-danger-text;
   }
 }
