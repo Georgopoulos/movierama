@@ -15,3 +15,8 @@ george:
   fullname: George Georgopoulos
   email: g_georgop@yahoo.gr
   password_digest: <%= User.digest('password') %>
+
+maria:
+  fullname: Maria Georgopoulou
+  email: m.georgopoulou@mail.com
+  password_digest: <%= User.digest('password') %>
