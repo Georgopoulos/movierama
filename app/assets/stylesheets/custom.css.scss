@@ -67,6 +67,18 @@ p {
   }
 }
 
+.navbar-nav > li > div {
+  padding: 15px 0;
+  color: #777777;
+  a {
+    color: #777777;
+    &:hover {
+      color: #ffffff;
+      text-decoration: none;
+    }
+  }
+}
+
 
 /* ---------------- footer ---------------- */
 
@@ -119,4 +131,18 @@ input {
   .form-control {
     color: $state-danger-text;
   }
+}
+
+.checkbox {
+  margin-top: -10px;
+  margin-bottom: 10px;
+  span {
+    margin-left: 20px;
+    font-weight: normal;
+  }
+}
+
+#session_remember_me {
+  width: auto;
+  margin-left: 0;
 }

@@ -14,7 +14,7 @@ require 'test_helper'
 class UserTest < ActiveSupport::TestCase
   
 	def setup
-		@user = User.new(email: "g_georgop@yahoo.gr", fullname: "George Georgopoulos",
+		@user = User.new(email: "user@mail.com", fullname: "Mr User",
 										 password: "foobar", password_confirmation: "foobar")
 	end
 
@@ -68,7 +68,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "email should be saved as downcase" do
-    mixed_case_email = "g_GeorgOP@YahOO.GR"
+    mixed_case_email = "UsER_mixedCase@mail.COM"
     @user.email = mixed_case_email
     @user.save
     assert_equal @user.reload.email, mixed_case_email.downcase
@@ -77,6 +77,10 @@ class UserTest < ActiveSupport::TestCase
   test "password should have a minimum length" do
   	@user.password = @user.password_confirmation = "a" * 5
   	assert_not @user.valid?
+  end
+
+  test "authenticated? should return false for a user with nil digest" do
+    assert_not @user.authenticated?('')
   end
 
 end

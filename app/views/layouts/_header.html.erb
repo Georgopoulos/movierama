@@ -3,8 +3,13 @@
     <%= link_to "MovieRama", root_path, id: "logo" %>
     <nav>
       <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to "Log in", '#' %></li>
-        <li><%= link_to "Sign up", signup_path %></li>
+        <% if logged_in? %>
+          <li><div>Welcome back <%= link_to current_user.fullname, current_user %></div></li>
+          <li><%= link_to "Log out", logout_path, method: "delete" %></li>
+        <% else %>
+          <li><%= link_to "Log in", login_path %></li>
+          <li><%= link_to "Sign up", signup_path %></li>
+        <% end %>
       </ul>
     </nav>
   </div>
