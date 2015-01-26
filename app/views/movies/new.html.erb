@@ -1,0 +1,19 @@
+<% provide(:title, 'New movie') %>
+
+<h1>New movie</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(@movie) do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+
+      <%= f.label :title %>
+      <%= f.text_field :title, class: 'form_control' %>
+
+      <%= f.label :description %>
+      <%= f.text_area :description, placeholder: "Here you can compose the movie description...", class: 'form_control' %>
+
+      <%= f.submit "Save", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

@@ -2,11 +2,13 @@
 #
 # Table name: users
 #
-#  id         :integer          not null, primary key
-#  email      :string
-#  fullname   :string
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id              :integer          not null, primary key
+#  email           :string
+#  fullname        :string
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  password_digest :string
+#  remember_digest :string
 #
 
 require 'test_helper'
@@ -81,6 +83,17 @@ class UserTest < ActiveSupport::TestCase
 
   test "authenticated? should return false for a user with nil digest" do
     assert_not @user.authenticated?('')
+  end
+
+  test "associated movies should be destroyed" do
+    @user.save
+    @user.movies.create!( title: "Another Good Movie",
+                          description: "Yet another good movie!",
+                          likes: 10,
+                          hates: 2)
+    assert_difference 'Movie.count', -1 do
+      @user.destroy
+    end
   end
 
 end

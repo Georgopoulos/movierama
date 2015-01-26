@@ -1,5 +1,24 @@
 <% provide(:title, @user.fullname) %>
 
-<h1>Hey, <%= @user.fullname %> !</h1>
+<h1><%= @user.fullname %>'s Movies</h1>
 
-Here is your home!
+<div class="row">
+  <div class="col-md-8">
+    <% if @user.movies.any? %>
+      <ul class="movies">
+        <%= render @movies %>
+      </ul>
+      <%= will_paginate @movies %>
+    <% else %>
+      <h3>Hey, you don't have any movies yet...</h3>
+      Click the 'New Movie' button to add your first movie.
+      </h3>
+    <% end %>
+  </div>
+  <div class="col-md-4">
+    <div class="text-center">
+      <br>
+      <%= link_to "New Movie", new_movie_path, class: "btn btn-success" if current_user?(@user) %>  
+    </div>
+  </div>
+</div>

@@ -2,16 +2,21 @@
 #
 # Table name: users
 #
-#  id         :integer          not null, primary key
-#  email      :string
-#  fullname   :string
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id              :integer          not null, primary key
+#  email           :string
+#  fullname        :string
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  password_digest :string
+#  remember_digest :string
 #
 
 class User < ActiveRecord::Base
 
 	attr_accessor :remember_token
+
+	# -------------------------- Associations ----------------------------
+	has_many :movies, dependent: :destroy
 
 	# -------------------------- Callbacks -------------------------------
 

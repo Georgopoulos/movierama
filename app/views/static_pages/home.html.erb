@@ -1,6 +1,23 @@
 <% provide(:title, "Home") %>
 
-<h1>MovieRama Homepage</h1>
-<p>
-  This is the project's homepage!
-</p>
+<h1>Movies Index</h1>
+
+<div class="row">
+  <div class="col-md-8">
+    <% if @movies.any? %>
+      <%= will_paginate @movies %>
+      <ul class="movies">
+        <%= render @movies %>
+      </ul>
+      <%= will_paginate @movies %>
+    <% else %>
+      <h3>There are no movies to display.</h3>
+    <% end %>
+  </div>
+  <div class="col-md-4">
+    <div class="text-center">
+      <br><br>
+      <%= link_to "New Movie", new_movie_path, class: "btn btn-success" if logged_in? %>  
+    </div>
+  </div>
+</div>

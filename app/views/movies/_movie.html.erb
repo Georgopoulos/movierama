@@ -1,0 +1,21 @@
+<li id="movie-<%= movie.id %>">
+	<div>
+    <span class="title"><%= movie.title %></span>
+    <% if current_user?(movie.user) %>
+      <small>
+        <%= link_to "Edit", edit_movie_path(movie) %> |
+        <%= link_to "Delete", movie,  method: :delete,
+                                      data: { confirm: "Are you sure?" } %>
+      </small>
+    <% end %>
+  </div>
+	<div class="user-timestamp">
+		Posted by 
+    <%= link_to current_user?(movie.user) ? "You" : movie.user.fullname, movie.user %> 
+    <span><%= time_ago_in_words(movie.created_at) %> ago.</span>
+	</div>
+	<br>
+	<div class="description"><%= movie.description %></div>
+	<br><br>
+	<%= movie.likes %> likes | <%= movie.hates %> hates
+</li>

@@ -17,6 +17,9 @@ Rails.application.routes.draw do
   post 'login'    => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
 
+  # Movies
+  resources :movies
+
 
 
   # The priority is based upon order of creation: first created -> highest priority.

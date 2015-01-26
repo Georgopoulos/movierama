@@ -32,6 +32,7 @@ class UsersController < ApplicationController
 
   def show
   	@user = User.find(params[:id])
+    @movies = @user.movies.paginate(page: params[:page], per_page: 10)
   end
 
   private
@@ -40,14 +41,6 @@ class UsersController < ApplicationController
   		params.require(:user).permit(:fullname, :email, :password, 
 																	 :password_confirmation)
   	end
-
-    def logged_in_user
-      unless logged_in?
-        store_location
-        flash[:danger] = "You have to log in first!"
-        redirect_to login_url
-      end
-    end
 
     def correct_user
       @user = User.find(params[:id])
