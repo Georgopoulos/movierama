@@ -1,6 +1,6 @@
 class MoviesController < ApplicationController
 	
-	before_action :logged_in_user, only: [:new, :create, :destroy]
+	before_action :logged_in_user, only: [:new, :create, :edit, :update, :destroy]
   before_action :movie_uploader, only: [:edit, :update, :destroy]
 
 	def new
@@ -42,7 +42,7 @@ class MoviesController < ApplicationController
     end
 
     def movie_uploader
-      @movie = current_user.movies.find_by(id: params[:id])
+      @movie = current_user.movies.find_by(id: params[:id]) if current_user
       redirect_to root_url if @movie.nil?
     end
 end

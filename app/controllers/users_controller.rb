@@ -32,7 +32,7 @@ class UsersController < ApplicationController
 
   def show
   	@user = User.find(params[:id])
-    @movies = @user.movies.paginate(page: params[:page], per_page: 10)
+    @movies = @user.movies.paginate(page: params[:page])
   end
 
   private
