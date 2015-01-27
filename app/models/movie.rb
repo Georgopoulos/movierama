@@ -16,6 +16,7 @@ class Movie < ActiveRecord::Base
   
 	# ------------------------- Associations -------------------------
   belongs_to :user
+  has_many :votes, dependent: :destroy
 
 	# ------------------------- Validations --------------------------
 	validates :user_id, presence: true

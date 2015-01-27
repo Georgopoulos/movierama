@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
 
 	# -------------------------- Associations ----------------------------
 	has_many :movies, dependent: :destroy
+	has_many :votes, dependent: :destroy
 
 	# -------------------------- Callbacks -------------------------------
 

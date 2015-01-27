@@ -30,6 +30,13 @@ most_liked:
   user: george
   created_at: <%= 10.minutes.ago %>
 
+marias_movie:
+  title: Movie from Maria
+  description: A movie added by Maria
+  likes: 0
+  hates: 0
+  user: maria
+
 <% 20.times do |m| %>
 movie_<%= m %>:
   title: Movie No <%= m %>
