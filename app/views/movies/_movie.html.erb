@@ -1,21 +1,39 @@
 <li id="movie-<%= movie.id %>">
-	<div>
-    <span class="title"><%= movie.title %></span>
-    <% if current_user?(movie.user) %>
-      <small>
-        <%= link_to "Edit", edit_movie_path(movie) %> |
-        <%= link_to "Delete", movie,  method: :delete,
-                                      data: { confirm: "Are you sure?" } %>
-      </small>
-    <% end %>
+	<div class="col-md-12">
+    <div>
+      <span class="title"><%= movie.title %></span>
+      <% if current_user?(movie.user) %>
+        <small>
+          <%= link_to "Edit", edit_movie_path(movie) %> |
+          <%= link_to "Delete", movie,  method: :delete,
+                                        data: { confirm: "Are you sure?" } %>
+        </small>
+      <% end %>
+    </div>
+  	<div class="user-timestamp">
+  		Posted by 
+      <%= link_to current_user?(movie.user) ? "You" : movie.user.fullname, movie.user %> 
+      <span><%= time_ago_in_words(movie.created_at) %> ago.</span>
+  	</div>
+  	<br>
+  	<div class="description"><%= movie.description %></div>
+  	<br>
+    <div class="row">
+      <div class="col-md-3">
+        <%= link_to "#{movie.likes} likes", movie_votes_path(movie.id, positive: true), method: :post %> |
+        <%= link_to "#{movie.hates} hates", movie_votes_path(movie.id, positive: false), method: :post %>
+      </div>
+      <% if logged_in? %>
+        <% unless own_movie?(movie) %>
+          <% if v = voted?(current_user, movie) %>
+            <div class="col-md-4 col-md-offset-5 text-right">
+              You <%= vote(v) %> this movie |
+              <%= link_to "Un#{vote(v)}", movie_vote_path(movie, v), method: :delete %>
+            </div>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
   </div>
-	<div class="user-timestamp">
-		Posted by 
-    <%= link_to current_user?(movie.user) ? "You" : movie.user.fullname, movie.user %> 
-    <span><%= time_ago_in_words(movie.created_at) %> ago.</span>
-	</div>
-	<br>
-	<div class="description"><%= movie.description %></div>
-	<br><br>
-	<%= movie.likes %> likes | <%= movie.hates %> hates
+  <div class="clearfix"></div>
 </li>

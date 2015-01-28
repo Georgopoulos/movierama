@@ -26,4 +26,25 @@ class Movie < ActiveRecord::Base
 	# ------------------------- Scopes --------------------------------
 	default_scope -> { order(likes: :desc) }
 
+	# ------------------------- Instance Methods ----------------------
+	def add_like!
+		self.likes += 1
+		save
+	end
+
+	def add_hate!
+		self.hates += 1
+		save
+	end
+
+	def remove_like!
+		self.likes -= 1
+		save
+	end
+
+	def remove_hate!
+		self.hates -= 1
+		save
+	end
+
 end

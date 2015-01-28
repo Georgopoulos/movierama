@@ -1,5 +1,5 @@
 class StaticPagesController < ApplicationController
   def home
-    @movies = Movie.all.paginate(page: params[:page], per_page: 10)
+    @movies = Movie.includes(:user, :votes).paginate(page: params[:page], per_page: 10)
   end
 end

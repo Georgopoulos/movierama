@@ -37,13 +37,13 @@ class VoteTest < ActiveSupport::TestCase
   	@vote.save
   	@another_vote = @vote.dup
   	assert_not @another_vote.valid?
-  	assert_equal @another_vote.errors.full_messages, ["User can't vote twice for same movie"]
+  	assert_equal @another_vote.errors.full_messages, ["User already voted this movie"]
   end
 
   test "should not be able to vote his/her own movie" do
   	movie = movies(:a_movie)
   	@vote.movie_id = movie.id
   	assert_not @vote.valid?
-  	assert_equal @vote.errors.full_messages, ["User can't vote his/her own movie"]
+  	assert_equal @vote.errors.full_messages, ["User can't vote your own movie"]
   end
 end

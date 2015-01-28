@@ -20,7 +20,7 @@ class Vote < ActiveRecord::Base
   validates :user_id, presence: true
   validates :movie_id, presence: true
   validates_uniqueness_of :user_id, scope: :movie_id,
-  												message: "can't vote twice for same movie"
+  												message: "already voted this movie"
 	validate :movie_cannot_be_voted_by_uploader
 
 	
@@ -28,6 +28,6 @@ class Vote < ActiveRecord::Base
 
 	def movie_cannot_be_voted_by_uploader
 		uploader = Movie.find(self.movie_id).user if self.movie_id
-		self.errors[:user_id] << "can't vote his/her own movie" if uploader == user
+		self.errors[:user_id] << "can't vote your own movie" if uploader == user
 	end
 end
