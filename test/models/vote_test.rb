@@ -18,9 +18,9 @@ class VoteTest < ActiveSupport::TestCase
 		@vote = votes(:one)
 	end
 
-	# test "should be valid" do
-	# 	assert @vote.valid?
-	# end
+	test "should be valid" do
+		assert @vote.valid?
+	end
 
   test "should belong to user" do
   	@vote.user_id = nil

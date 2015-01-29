@@ -15,12 +15,12 @@
 class Movie < ActiveRecord::Base
   
 	# ------------------------- Associations -------------------------
-  belongs_to :user
-  has_many :votes, dependent: :destroy
+ 	belongs_to :user
+	has_many :votes, dependent: :destroy
 
 	# ------------------------- Validations --------------------------
 	validates :user_id, presence: true
 	validates :title, presence: true, length: { maximum: 120 }
 	validates :description, presence: true
-
+	
 end

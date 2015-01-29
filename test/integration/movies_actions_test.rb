@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class MoviesNewTest < ActionDispatch::IntegrationTest
+class MoviesActionsTest < ActionDispatch::IntegrationTest
 
 	def setup
 		@user = users(:george)

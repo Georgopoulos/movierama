@@ -14,10 +14,10 @@
 
 one:
   user: george
-  movie: a_movie
+  movie: marias_movie
   positive: true
 
 two:
-  user: george
-  movie: most_liked
+  user: maria
+  movie: a_movie
   positive: false

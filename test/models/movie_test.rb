@@ -15,6 +15,8 @@
 require 'test_helper'
 
 class MovieTest < ActiveSupport::TestCase
+
+  include MoviesHelper
   
   def setup
   	@user = users(:george)
@@ -47,10 +49,6 @@ class MovieTest < ActiveSupport::TestCase
  	test "description should be present" do
  		@movie.description = nil
  		assert_not @movie.valid?
- 	end
-
- 	test "order should be most likes first" do
- 		assert_equal Movie.first, movies(:most_liked)
  	end
 
 end

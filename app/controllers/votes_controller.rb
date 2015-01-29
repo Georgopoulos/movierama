@@ -12,6 +12,8 @@ class VotesController < ApplicationController
   	if @vote.save
       votes = render_to_string(partial: 'votes/votes', locals: { movie: @vote.movie })
       render json: { votes: votes }
+    else
+      render json: { error: @vote.errors.messages }
     end
     
   end

@@ -15,6 +15,26 @@ class UsersProfileTest < ActionDispatch::IntegrationTest
       assert_match movie.description, response.body
       assert_select "a[href=?]", edit_movie_path(movie), count: 0
       assert_select "a", text: 'Delete', count: 0
+      assert_select ".js-vote", 0
+      assert_select ".js-remove-vote", 0
+    end
+  end
+
+  test "profile page logged in as other user" do
+    another_user = users(:maria)
+    log_in_as another_user
+    follow_redirect!
+    assert_select "title", "#{another_user.fullname} | MovieRama"
+    get user_path(@user)
+    assert_template 'users/show'
+    assert_select "title", "#{@user.fullname} | MovieRama"
+    @user.movies.each do |movie|
+      assert_select "a[href=?]", edit_movie_path(movie), count: 0
+      assert_select "a", text: 'Delete', count: 0
+      # Render like/hate buttons for not voted movies
+      assert_select ".js-vote"
+      # Render Remove Vote button if voted before
+      assert_select ".js-remove-vote"
     end
   end
 
@@ -30,6 +50,9 @@ class UsersProfileTest < ActionDispatch::IntegrationTest
       # Edit / Delete textlinks are rendered for each movie 
       assert_select "a[href=?]", edit_movie_path(movie)
       assert_select "a", text: 'Delete'
+      # Vote / Remove Vote are not render for movie uploader
+      assert_select ".js-vote", 0
+      assert_select ".js-remove-vote", 0
     end
   end
 end
