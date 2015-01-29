@@ -18,9 +18,13 @@ class Movie < ActiveRecord::Base
  	belongs_to :user
 	has_many :votes, dependent: :destroy
 
+	# ------------------------- Callbacks ----------------------------
+	before_save { title.downcase! }
+
 	# ------------------------- Validations --------------------------
 	validates :user_id, presence: true
-	validates :title, presence: true, length: { maximum: 120 }
+	validates :title, presence: true, length: { maximum: 120 },
+																		uniqueness: { case_sensitive: false }
 	validates :description, presence: true
 	
 end

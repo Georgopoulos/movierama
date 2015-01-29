@@ -46,6 +46,20 @@ class MovieTest < ActiveSupport::TestCase
   	assert_not @movie.valid?
  	end
 
+  test "title should be unique" do
+    duplicated_movie = @movie.dup
+    duplicated_movie.title = @movie.title.upcase
+    @movie.save
+    assert_not duplicated_movie.valid?
+  end
+
+  test "title should be saved as downcase" do
+    mixed_case_title = "The MAtrIX"
+    @movie.title = mixed_case_title
+    @movie.save
+    assert_equal @movie.reload.title, mixed_case_title.downcase
+  end 
+
  	test "description should be present" do
  		@movie.description = nil
  		assert_not @movie.valid?

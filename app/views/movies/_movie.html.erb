@@ -1,7 +1,7 @@
 <li id="movie-<%= movie.id %>">
 	<div class="col-md-12">
     <div>
-      <span class="title"><%= movie.title %></span>
+      <span class="title"><%= movie.title.titleize %></span>
       <small>
         <%= render partial: 'movies/movie_actions', locals: { movie: movie } if current_user?(movie.user) %>
       </small>

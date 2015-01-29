@@ -22,7 +22,7 @@ class MoviesActionsTest < ActionDispatch::IntegrationTest
 		end
 		assert_redirected_to user_path(@user)
 		follow_redirect!
-		assert_match title, response.body
+		assert_match title.titleize, response.body
 		assert_match description, response.body
 		# Edit movie
 		assert_select 'a', text: 'Edit'

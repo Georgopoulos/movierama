@@ -11,7 +11,7 @@ class UsersProfileTest < ActionDispatch::IntegrationTest
     assert_template 'users/show'
     assert_select "a[href=?]", new_movie_path, count: 0
     @user.movies.each do |movie|
-      assert_match movie.title, response.body
+      assert_match movie.title.titleize, response.body
       assert_match movie.description, response.body
       assert_select "a[href=?]", edit_movie_path(movie), count: 0
       assert_select "a", text: 'Delete', count: 0
@@ -45,7 +45,7 @@ class UsersProfileTest < ActionDispatch::IntegrationTest
     # New movie button is displayed
     assert_select "a[href=?]", new_movie_path
     @user.movies.each do |movie|
-      assert_match movie.title, response.body
+      assert_match movie.title.titleize, response.body
       assert_match movie.description, response.body
       # Edit / Delete textlinks are rendered for each movie 
       assert_select "a[href=?]", edit_movie_path(movie)
