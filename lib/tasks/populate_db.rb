@@ -13,7 +13,7 @@ maria = 	User.create(fullname: "Maria Georgopoulou", email: "m.georgopoulou@hotm
 
 # Create movies from these users
 m1 = george.movies.create(title: "The Matrix",	
-												 description: "A computer hacker learns from mysterious rebels 
+												  description: "A computer hacker learns from mysterious rebels 
 												 							about the true nature of his reality and his role 
 												 							in the war against its controllers.")
 george.movies.create(title: "Forrest Gump",

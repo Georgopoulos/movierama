@@ -38,7 +38,7 @@ class UsersController < ApplicationController
     elsif params[:sort] == 'hates'
       @movies = @user.movies.order('hates DESC')
     else
-      @movies = @user.movies
+      @movies = @user.movies.order('likes DESC')
     end
     @movies = @movies.paginate(page: params[:page])
   end
