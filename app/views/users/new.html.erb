@@ -1,5 +1,4 @@
 <% provide(:title, 'Sign up') %>
-
 <h1>Sign up</h1>
 
 <div class="row">
@@ -8,16 +7,16 @@
       <%= render 'shared/error_messages', object: f.object %>
 
       <%= f.label :fullname %>
-      <%= f.text_field :fullname, class: 'form_control' %>
+      <%= f.text_field :fullname, class: 'form-control' %>
 
       <%= f.label :email %>
-      <%= f.email_field :email, class: 'form_control' %>
+      <%= f.email_field :email, class: 'form-control' %>
 
       <%= f.label :password %>
-      <%= f.password_field :password, class: 'form_control' %>
+      <%= f.password_field :password, class: 'form-control' %>
 
       <%= f.label :password_confirmation, "Password Confirmation" %>
-      <%= f.password_field :password_confirmation, class: 'form_control' %>
+      <%= f.password_field :password_confirmation, class: 'form-control' %>
 
       <%= f.submit "Create account", class: "btn btn-primary" %>
     <% end %>

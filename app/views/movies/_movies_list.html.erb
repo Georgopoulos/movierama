@@ -1,0 +1,9 @@
+<% if movies.any? %>
+  <%= render partial: 'shared/filters' %>
+  <ul class="movies">
+    <%= render movies %>
+  </ul>
+  <%= will_paginate movies %>
+<% else %>
+  <h3>There are no movies to display.</h3>
+<% end %>

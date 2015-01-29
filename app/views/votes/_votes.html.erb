@@ -1,21 +1,37 @@
-<% if v = voted?(current_user, movie) %>
-  <% if v.positive %>
-    <%= "#{movie.likes} likes" %> |
-    <span class="js-vote link" data-url="<%= movie_votes_path(movie.id, positive: false) %>">
-      <%= "#{movie.hates} hates" %>
-    </span>
-  <% else %>  
-    <span class="js-vote link" data-url="<%= movie_votes_path(movie.id, positive: true) %>">
-      <%= "#{movie.likes} likes" %>
-    </span> |
-    <%= "#{movie.hates} hates" %>
+<% if logged_in? && !own_movie?(movie) %>
+  <% if v = voted?(current_user, movie) %>
+    <div class="col-md-3">
+      <% if v.positive %>
+        <%= "#{movie.likes} likes" %> |
+        <span class="js-vote link" data-url="<%= movie_votes_path(movie.id, positive: false) %>">
+          <%= "#{movie.hates} hates" %>
+        </span>
+      <% else %>  
+        <span class="js-vote link" data-url="<%= movie_votes_path(movie.id, positive: true) %>">
+          <%= "#{movie.likes} likes" %>
+        </span> |
+        <%= "#{movie.hates} hates" %>
+      <% end %>
+    </div>
+    <div class="col-md-4 col-md-offset-5 text-right">
+      You <%= vote(v) %> this movie |
+      <span class="js-remove-vote link" data-url="<%= movie_vote_path(movie, v) %>">
+        <%= "Un#{vote(v)}" %>
+      </span>
+    </div>
+  <% else %>
+    <div class="col-md-3">
+      <span class="js-vote link" data-url="<%= movie_votes_path(movie.id, positive: true) %>">
+        <%= "#{movie.likes} likes" %>
+      </span>
+      |
+      <span class="js-vote link" data-url="<%= movie_votes_path(movie.id, positive: false) %>">
+        <%= "#{movie.hates} hates" %>
+      </span>
+    </div>
   <% end %>
 <% else %>
-  <span class="js-vote link" data-url="<%= movie_votes_path(movie.id, positive: true) %>">
-    <%= "#{movie.likes} likes" %>
-  </span>
-  |
-  <span class="js-vote link" data-url="<%= movie_votes_path(movie.id, positive: false) %>">
-    <%= "#{movie.hates} hates" %>
-  </span>
+  <div class="col-md-3">
+    <%= "#{movie.likes} likes" %> | <%= "#{movie.hates} hates" %>
+  </div>
 <% end %>

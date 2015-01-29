@@ -1,9 +1,5 @@
 module ApplicationHelper
 	def filter_class(filter)
-		if params[:sort] == filter
-			'label-warning'
-		else
-			'label-default'
-		end
+		params[:sort] == filter	? 'label-warning' : 'label-default'
 	end
 end

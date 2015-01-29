@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
 
+  include MoviesHelper
+
   before_action :logged_in_user, only: [:edit, :update]
   before_action :correct_user, only: [:edit, :update]
 
@@ -32,15 +34,7 @@ class UsersController < ApplicationController
 
   def show
   	@user = User.find(params[:id])
-
-    if params[:sort] == 'date'
-      @movies = @user.movies.order('created_at DESC')
-    elsif params[:sort] == 'hates'
-      @movies = @user.movies.order('hates DESC')
-    else
-      @movies = @user.movies.order('likes DESC')
-    end
-    @movies = @movies.paginate(page: params[:page])
+    @movies = order_movies(@user.movies)
   end
 
   private

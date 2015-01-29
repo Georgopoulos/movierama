@@ -11,9 +11,7 @@ class VotesController < ApplicationController
     
   	if @vote.save
       votes = render_to_string(partial: 'votes/votes', locals: { movie: @vote.movie })
-      vote_msg = render_to_string(partial: 'votes/vote_msg', 
-                                  locals: { movie: @vote.movie, v: @vote })
-      render json: { votes: votes, vote_msg: vote_msg }
+      render json: { votes: votes }
     end
     
   end

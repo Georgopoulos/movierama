@@ -1,28 +1,22 @@
 $(function () {
 	$(".movies").on("click", ".js-vote", function () {
-		var votesDiv, voteMsg;
-		votesDiv = $(this).parent();
-		voteMsg = votesDiv.next();
+		var votesPartial = $(this).parent().parent();
 		$.ajax({
 			url: $(this).attr("data-url"),
 			type: 'POST'
 		}).done(function(data) {
-			votesDiv.html(data.votes);	
-			voteMsg.empty().append(data.vote_msg);
+			votesPartial.empty().append(data.votes);
 		});
 	});
 
 	$(".movies").on("click", ".js-remove-vote", function () {
-		var votesDiv, voteMsg;
-		voteMsg = $(this).parent();
-		votesDiv = voteMsg.prev();
+		var votesPartial = $(this).parent().parent();
 		$.ajax({
 			url: $(this).attr("data-url"),
 			type: 'POST',
 			data: {"_method":"delete"}
 		}).done(function(data) {
-			voteMsg.empty();
-			votesDiv.empty().append(data.votes);			
+			votesPartial.empty().append(data.votes);			
 		});
 	});
 });
