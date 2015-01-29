@@ -1,0 +1,6 @@
+<div style="padding-left: 40px;">
+  <small>Sort by:</small> 
+  <%= link_to "Likes", url_for(sort: 'likes'), class: "label #{filter_class('likes')}" %>
+  <%= link_to "Hates", url_for(sort: 'hates'), class: "label #{filter_class('hates')}" %>
+  <%= link_to "Date", url_for(sort: 'date'), class: "label #{filter_class('date')}" %>
+</div>

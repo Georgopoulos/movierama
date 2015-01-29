@@ -55,6 +55,17 @@ p {
   color: #B51106;
 }
 
+.link {
+  color: #428bca;
+  text-decoration: none;
+}
+
+.link:hover, .link:focus {
+  color: #2a6496;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 /* -------------- header ---------------- */
 
 #logo {

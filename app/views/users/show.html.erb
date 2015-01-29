@@ -5,6 +5,7 @@
 <div class="row">
   <div class="col-md-8">
     <% if @user.movies.any? %>
+      <%= render partial: 'shared/filters' %>
       <ul class="movies">
         <%= render @movies %>
       </ul>

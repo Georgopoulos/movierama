@@ -32,7 +32,15 @@ class UsersController < ApplicationController
 
   def show
   	@user = User.find(params[:id])
-    @movies = @user.movies.paginate(page: params[:page])
+
+    if params[:sort] == 'date'
+      @movies = @user.movies.order('created_at DESC')
+    elsif params[:sort] == 'hates'
+      @movies = @user.movies.order('hates DESC')
+    else
+      @movies = @user.movies
+    end
+    @movies = @movies.paginate(page: params[:page])
   end
 
   private

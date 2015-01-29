@@ -23,28 +23,4 @@ class Movie < ActiveRecord::Base
 	validates :title, presence: true, length: { maximum: 120 }
 	validates :description, presence: true
 
-	# ------------------------- Scopes --------------------------------
-	default_scope -> { order(likes: :desc) }
-
-	# ------------------------- Instance Methods ----------------------
-	def add_like!
-		self.likes += 1
-		save
-	end
-
-	def add_hate!
-		self.hates += 1
-		save
-	end
-
-	def remove_like!
-		self.likes -= 1
-		save
-	end
-
-	def remove_hate!
-		self.hates -= 1
-		save
-	end
-
 end

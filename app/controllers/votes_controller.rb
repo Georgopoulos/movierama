@@ -1,28 +1,35 @@
 class VotesController < ApplicationController
 	
 	before_action :logged_in_user, only: [:create, :destroy]
+  before_action :destroy_if_voted_before, only: :create
 
   def create
 		
 		@vote = current_user.votes.new
 		@vote.movie_id = params[:movie_id]
 		@vote.positive = params[:positive]
-
+    
   	if @vote.save
-      @vote.positive ? @vote.movie.add_like! : @vote.movie.add_hate!
-    else
-      flash[:danger] = "You #{@vote.errors.messages[:user_id][0]}"
+      votes = render_to_string(partial: 'votes/votes', locals: { movie: @vote.movie })
+      vote_msg = render_to_string(partial: 'votes/vote_msg', 
+                                  locals: { movie: @vote.movie, v: @vote })
+      render json: { votes: votes, vote_msg: vote_msg }
     end
     
-    redirect_to :back
   end
 
   def destroy
     vote = Vote.find(params[:id])
-    vote.positive ? vote.movie.remove_like! : vote.movie.remove_hate!
     vote.destroy
-    flash[:success] = "Vote cancelled"
-    redirect_to :back
+    votes = render_to_string(partial: 'votes/votes', locals: { movie: vote.movie })
+    render json: { votes: votes }
   end
+
+  private
+    def destroy_if_voted_before
+      if vote = Vote.find_by(user_id: current_user, movie_id: params[:movie_id])
+        vote.destroy
+      end
+    end
 
 end

@@ -1,0 +1,21 @@
+<% if v = voted?(current_user, movie) %>
+  <% if v.positive %>
+    <%= "#{movie.likes} likes" %> |
+    <span class="js-vote link" data-url="<%= movie_votes_path(movie.id, positive: false) %>">
+      <%= "#{movie.hates} hates" %>
+    </span>
+  <% else %>  
+    <span class="js-vote link" data-url="<%= movie_votes_path(movie.id, positive: true) %>">
+      <%= "#{movie.likes} likes" %>
+    </span> |
+    <%= "#{movie.hates} hates" %>
+  <% end %>
+<% else %>
+  <span class="js-vote link" data-url="<%= movie_votes_path(movie.id, positive: true) %>">
+    <%= "#{movie.likes} likes" %>
+  </span>
+  |
+  <span class="js-vote link" data-url="<%= movie_votes_path(movie.id, positive: false) %>">
+    <%= "#{movie.hates} hates" %>
+  </span>
+<% end %>

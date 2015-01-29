@@ -5,7 +5,7 @@
 <div class="row">
   <div class="col-md-8">
     <% if @movies.any? %>
-      <%= will_paginate @movies %>
+      <%= render partial: 'shared/filters' %>
       <ul class="movies">
         <%= render @movies %>
       </ul>
@@ -16,7 +16,7 @@
   </div>
   <div class="col-md-4">
     <div class="text-center">
-      <br><br>
+      <br>
       <%= link_to "New Movie", new_movie_path, class: "btn btn-success" if logged_in? %>  
     </div>
   </div>
